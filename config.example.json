@@ -1,0 +1,29 @@
+{
+  "output_dir": "/path/to/an/output/folder",
+  "inputs": {
+    "realtime_ratings": "/path/to/the/continuous/valence/ratings",
+    "panas_items": "/path/to/the/item-level/PANAS-SF/ratings",
+    "task_responses": "/path/to/the/item-level/comprehension/and/antonym/responses",
+    "demographics": "/path/to/the/demographic/and/clinical/table",
+    "aphasia_quotient": "/path/to/the/WAB-R/Aphasia/Quotient/table",
+    "questionnaire_labels": "/path/to/the/questionnaire/export/with/labels",
+    "questionnaire_raw": "/path/to/the/questionnaire/export/with/raw/codes",
+    "familiarity": "/path/to/the/clip/familiarity/export",
+    "main_concept_measures": "/path/to/the/main/concept/measures"
+  },
+  "participant_rules": {
+    "exclude_groups": [
+      "<group label outside the analytic sample>"
+    ],
+    "exclude_participants": [
+      "<participant ID>"
+    ],
+    "relabel_participants": [
+      {
+        "from": "<recorded ID>",
+        "to": "<corrected ID>",
+        "group": "<corrected group>"
+      }
+    ]
+  }
+}

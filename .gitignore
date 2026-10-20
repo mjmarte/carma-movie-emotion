@@ -1,0 +1,18 @@
+# Local configuration with the paths of the study's input files (never tracked)
+config.json
+# Data and outputs stay outside the repository; these patterns are a safety net
+data/
+outputs/
+*.RData
+*.Rdata
+*.rds
+*.csv
+*.tsv
+*.xlsx
+*.xls
+*.sav
+*.zip
+.Rhistory
+.Rproj.user/
+__pycache__/
+.DS_Store
