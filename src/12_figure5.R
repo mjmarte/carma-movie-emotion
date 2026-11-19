@@ -63,4 +63,5 @@ figure5 <- panel_a + mood_panel("PHQ_Total", "PHQ", "B. PC1 vs. PHQ Total Score"
   mood_panel("GAD_Total", "GAD", "C. PC1 vs. GAD Total Score", "GAD Total Score") +
   plot_layout(guides = "collect", widths = c(1, 1, 1)) & theme(legend.position = "bottom")
 ggsave(output_path("figure5.png"), figure5, width = 18, height = 6, dpi = 200, bg = "white")
+ggsave(output_path("figure5.pdf"), figure5, width = 18, height = 6, bg = "white", device = grDevices::cairo_pdf)
 for (i in seq_len(nrow(correlations))) with(correlations[i, ], cat(sprintf("%-12s r = %6.3f, p = %.3g, n = %d\n", label, r, p, n)))

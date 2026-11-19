@@ -30,4 +30,5 @@ figure3 <- ggplot(ratings, aes(Timepoint, Rating, color = Group, fill = Group)) 
         panel.background = element_rect(fill = "white", color = NA), plot.background = element_rect(fill = "white", color = NA),
         axis.text.x = element_text(size = 13))
 ggsave(output_path("figure3.png"), figure3, width = 16, height = 12, dpi = 300, bg = "white")
+ggsave(output_path("figure3.pdf"), figure3, width = 16, height = 12, bg = "white", device = grDevices::cairo_pdf)
 cat("Figure 3:", n_distinct(ratings$Participant), "participants,", nlevels(ratings$clip_abbrev), "clips\n")

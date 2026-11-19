@@ -25,7 +25,8 @@ To install the exact versions tested, use `remotes::install_version()` with the 
 1. Copy `config.example.json` to `config.json` and set the path of each input and of the output folder. `config.json` is not
    tracked, and every script refers to its inputs only by key (`R/config.R`).
 2. From the repository root, run `Rscript run_all.R`, which runs the scripts in `src/` in numbered order (about 6 minutes;
-   the SVM takes most of it). Each script writes its results to the output folder.
+   the SVM takes most of it). Each script writes its results to the output folder; the figure scripts also write vector PDFs (`figure1.pdf` to
+   `figure7.pdf`) next to the PNGs.
 
 ## Reproducing the paper
 
@@ -56,6 +57,7 @@ To install the exact versions tested, use `remotes::install_version()` with the 
 | `24_input_method.R` | Response-method check (Supplementary text) |
 | `25_outlier_checks.R` | Influential-observation checks (Methods 4.6) |
 | `26_figure3.R` | Figure 3 |
+| `27_reporting_statistics.R` | Degrees of freedom, 95% CIs, effect sizes and exact p values reported in the paper and Supplementary Tables |
 
 `R/foldwise_features.R` rebuilds the reference-dependent features (MSZ, ISC) from the training participants of each fold for the
 SVM and SVR; `R/theme_marte.R` is the plotting theme.

@@ -92,10 +92,12 @@ panel_a <- rain_panel(panels$`Figure 1A`, "accuracy", "Accuracy", c(-0.02, 1.02)
 panel_b <- rain_panel(panels$`Figure 1B`, "accuracy", "Accuracy", c(-0.02, 1.02), seq(0, 1, .25), scales::percent,
                       "B. Comprehension questions", 12)
 save_marte(panel_a / panel_b, output_path("figure1.png"), width = 10, height = 6.4)
+ggsave(output_path("figure1.pdf"), panel_a / panel_b, width = 10, height = 6.4, device = grDevices::cairo_pdf)
 panel_a <- rain_panel(panels$`Figure 2A`, "mean_rating", "Mean rating", c(0.95, 5.05), 1:5, waiver(), "A. Positive affect", 21) +
   theme(legend.position = "none")
 panel_b <- rain_panel(panels$`Figure 2B`, "mean_rating", "Mean rating", c(0.95, 5.05), 1:5, waiver(), "B. Negative affect", 22)
 save_marte(panel_a / panel_b, output_path("figure2.png"), width = 10, height = 6.4)
+ggsave(output_path("figure2.pdf"), panel_a / panel_b, width = 10, height = 6.4, device = grDevices::cairo_pdf)
 
 for (p in names(panels)) {
   d <- panels[[p]]

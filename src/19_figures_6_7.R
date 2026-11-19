@@ -64,6 +64,7 @@ beeswarm_panel <- function(df, xlab, title) {
 p6b <- beeswarm_panel(shap6, "SHAP value (impact on model output)", "SHAP values, combined classifier")
 f6 <- p6a + p6b + plot_layout(widths = c(1, 1.35))
 save_marte(f6, output_path("figure6.png"), width = 12, height = 5.5)
+ggsave(output_path("figure6.pdf"), f6, width = 12, height = 5.5, device = grDevices::cairo_pdf)
 
 # Figure 7A: predicted versus actual AQ, combined regression (nested leave-one-out), linear fit with 95% band, identity line
 pr <- read_csv(output_path("svr_loo_predictions.csv"), show_col_types = FALSE) %>% filter(set == "combined")
@@ -76,7 +77,7 @@ p7a <- ggplot(pr, aes(actual, predicted)) + geom_abline(slope = 1, intercept = 0
   coord_equal(xlim = c(20, 100), ylim = c(20, 100)) + scale_x_continuous(breaks = seq(20, 100, 20)) +
   scale_y_continuous(breaks = seq(20, 100, 20)) +
   labs(x = "Actual Aphasia Quotient", y = "Predicted Aphasia Quotient") + panel_marte("A", "Predicted versus actual Aphasia Quotient") +
-  statbox_marte(lab7, loc = "ul", size = 2.9)
+  statbox_marte(lab7, loc = "ul", size = 3.2)
 
 # Figure 7B: SHAP beeswarm of the combined regression (one instance per held-out participant)
 LAB7 <- c(AntGen_mean = "Antonym Generation", CompQ_mean = "Movie Comprehension", SampEn_Medium = "Sample Entropy (Medium)",
@@ -90,6 +91,7 @@ p7b <- beeswarm_panel(shap7, "SHAP value (Aphasia Quotient points)", "SHAP value
   theme(axis.text.y = element_text(size = 9))
 f7 <- p7a + p7b + plot_layout(widths = c(1, 1.25))
 save_marte(f7, output_path("figure7.png"), width = 12, height = 6)
+ggsave(output_path("figure7.pdf"), f7, width = 12, height = 6, device = grDevices::cairo_pdf)
 
 cat("Figure 6:", nrow(shap6) / 7, "held-out participants in the SHAP panel; feature order (top to bottom):",
     paste(gsub("\n", " ", rev(LAB6[ord6])), collapse = " | "), "\n")

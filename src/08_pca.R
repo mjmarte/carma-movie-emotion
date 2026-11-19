@@ -82,9 +82,9 @@ importance <- summary(pca)$importance
 # Figure 4
 group_colors <- c(HC = "#0072B2", PWA = "#CC0000")
 centroids <- scores %>% group_by(Group) %>% summarise(across(c(PC1, PC2, PC3), mean), .groups = "drop")
-pc_theme <- theme_bw(base_size = 10) +
-  theme(legend.position = "none", plot.title = element_text(face = "bold", size = 12),
-        axis.title = element_text(face = "bold", size = 10), axis.text = element_text(size = 9))
+pc_theme <- theme_bw(base_size = 12) +
+  theme(legend.position = "none", plot.title = element_text(face = "bold", size = 14),
+        axis.title = element_text(face = "bold", size = 12), axis.text = element_text(size = 12))
 pc_panel <- function(x, y, title) {
   ggplot(scores, aes(.data[[x]], .data[[y]])) +
     stat_ellipse(aes(color = Group), level = 0.68, linewidth = 1, alpha = 0.5) +
@@ -101,14 +101,15 @@ n_show <- min(sum(eigenvalues > 1), 3)
 loading_rows <- map_dfr(paste0("PC", 1:n_show), ~ loadings %>% select(Feature_Clean, Domain, Loading = all_of(.x)) %>% mutate(PC = .x)) %>%
   mutate(PC = factor(PC, levels = paste0("PC", 1:n_show)))
 panel_d <- ggplot(loading_rows, aes(reorder(Feature_Clean, Loading), Loading, fill = Domain)) +
-  theme_bw(base_size = 10) + geom_col(alpha = 0.8) + geom_hline(yintercept = 0, alpha = 0.5) +
+  theme_bw(base_size = 12) + geom_col(alpha = 0.8) + geom_hline(yintercept = 0, alpha = 0.5) +
   facet_wrap(~ PC, scales = "free_x", nrow = 1) + coord_flip() +
   scale_fill_manual(values = c(Linguistic = "#E69F00", `Emotional Reactivity` = "#56B4E9"), name = "Feature Domain") +
   labs(title = "D: Feature Loadings", x = NULL, y = "Loading Value") +
-  theme(plot.title = element_text(face = "bold", size = 12), legend.position = "bottom",
+  theme(plot.title = element_text(face = "bold", size = 14), legend.position = "bottom",
         legend.title = element_text(face = "bold", size = 14), legend.text = element_text(size = 12),
-        strip.text = element_text(face = "bold", size = 10), strip.background = element_rect(fill = "gray90"),
-        axis.text.y = element_text(size = 12, colour = "black"), axis.text.x = element_text(size = 9),
-        axis.title.x = element_text(face = "bold", size = 10))
+        strip.text = element_text(face = "bold", size = 12), strip.background = element_rect(fill = "gray90"),
+        axis.text.y = element_text(size = 12, colour = "black"), axis.text.x = element_text(size = 12),
+        axis.title.x = element_text(face = "bold", size = 12))
 figure4 <- (pc_panel("PC1", "PC2", "A: PC1 vs PC2") | pc_panel("PC1", "PC3", "B: PC1 vs PC3") | panel_c) / panel_d
 ggsave(output_path("figure4.png"), figure4, width = 16, height = 10, dpi = 300, bg = "white")
+ggsave(output_path("figure4.pdf"), figure4, width = 16, height = 10, bg = "white", device = grDevices::cairo_pdf)
